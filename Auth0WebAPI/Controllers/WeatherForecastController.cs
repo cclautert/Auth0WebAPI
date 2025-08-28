@@ -1,10 +1,6 @@
-﻿using Auth0.AspNetCore.Authentication;
-using Auth0WebAPI.Configuration;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.OAuth;
+﻿using Auth0WebAPI.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Models;
 using RestSharp;
 using Microsoft.Extensions.Options;
 
@@ -31,7 +27,7 @@ namespace Auth0WebAPI.Controllers
         [HttpGet("login")]
         public async Task<string> Login()
         {
-            var client = new RestClient(_auth0Config.Domain);
+            var client = new RestClient($"https://{_auth0Config.Domain}");
             var request = new RestRequest("oauth/token", Method.Post);
 
             // Body as object → RestSharp serializes to JSON
